@@ -4,12 +4,11 @@ import Dock from "./Dock";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ContentPage = () => {
-  const sections = [
-    { id: "section1", title: "Introduction" },
-    { id: "section2", title: "Features" },
-    { id: "section3", title: "Usage" },
-    { id: "section4", title: "FAQs" },
-  ];
+  // Generate 20 sections dynamically
+  const sections = Array.from({ length: 20 }, (_, i) => ({
+    id: `section${i + 1}`,
+    title: `Section ${i + 1}`,
+  }));
 
   const [activeId, setActiveId] = useState(null);
   const [showIndexMobile, setShowIndexMobile] = useState(false);
