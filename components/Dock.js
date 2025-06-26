@@ -32,7 +32,7 @@ function DockLabel({ children, isHovered }) {
           animate={{ opacity: 1, x: 12 }}
           exit={{ opacity: 0, x: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-3 py-1 text-xs text-white bg-black/50 rounded-md border border-white/10 shadow-lg backdrop-blur-md z-50"
+          className="absolute Z-50 left-full top-1/2 -translate-y-1/2 ml-3 px-3 py-1 text-xs text-white bg-black/50 rounded-md border border-white/10 shadow-lg backdrop-blur-md z-50"
         >
           {children}
         </motion.div>
@@ -90,7 +90,7 @@ function DockItem({
         />
       )}
       <span className="text-sm z-10">{label}</span>
-      <DockLabel isHovered={isHovered}>{label}</DockLabel>
+      {/* <DockLabel isHovered={isHovered}>{label}</DockLabel> */}
     </motion.div>
   );
 }
@@ -102,7 +102,6 @@ export default function Dock({
   spring = { mass: 0.1, stiffness: 150, damping: 12 },
   distance = 120,
   baseItemSize = 48,
-  dockWidth = 220,
 }) {
   const mouseY = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);
@@ -117,15 +116,14 @@ export default function Dock({
         isHovered.set(0);
         mouseY.set(Infinity);
       }}
-      className={`fixed top-4 left-4 h-[95vh] overflow-y-auto p-4 rounded-2xl z-50 
+      className={`relative w-full h-full overflow-y-auto p-4 rounded-xl z-10
         shadow-xl border border-blue-900/50
-        bg-black/20 backdrop-blur-lg 
+        bg-black/20 backdrop-blur-lg
         before:content-[''] before:absolute before:inset-0 before:rounded-2xl
         before:bg-gradient-to-br before:from-blue-900/40 before:to-black/10 before:blur-md before:z-[-1]
         after:content-[''] after:absolute after:inset-0 after:rounded-2xl
         after:ring-1 after:ring-blue-900/50 after:z-[-1]
         ${className}`}
-      style={{ width: dockWidth }}
     >
       <h3 className="text-xl font-bold text-white mb-5 border-b border-blue-900/50 pb-2">
         Index

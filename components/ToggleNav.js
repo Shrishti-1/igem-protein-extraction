@@ -19,7 +19,7 @@ export default function ToggleNav({ children }) {
 
       <style jsx>{`
         .container {
-          width: 20%;
+        //   width: 20%;
           display: flex;
           justify-content: left;
           align-items: center;

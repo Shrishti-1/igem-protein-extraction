@@ -57,9 +57,9 @@ box-shadow: 0 0 8px #00ffea, 0 0 15px #007bff;
 }
 
 /* Optional: add glow effect on focused scrollable elements */
-.scrollable:focus::-webkit-scrollbar-thumb {
+/* .scrollable:focus::-webkit-scrollbar-thumb {
   box-shadow: 0 0 20px #00ffff, 0 0 30px #3399ff;
-}
+} */
 
 /* Optional: smooth scroll behavior for whole page */
 html {

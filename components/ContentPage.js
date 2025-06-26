@@ -2,13 +2,49 @@
 import React, { useEffect, useRef, useState } from "react";
 import Dock from "./Dock";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMemo } from "react";
 
 const ContentPage = () => {
   // Generate 20 sections dynamically
-  const sections = Array.from({ length: 20 }, (_, i) => ({
-    id: `section${i + 1}`,
-    title: `Section ${i + 1}`,
-  }));
+
+  const sections = useMemo(() => [
+    {
+      id: "section1",
+      title: "Abhyudaya",
+      highPara: "Welcome to our platform. Here’s what you need to know.",
+      middleImages:
+        "https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg,https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg,https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg",
+      endPara: "We hope this introduction gives you a good start.",
+      gap: 10
+    },
+    {
+      id: "section2",
+      title: "Features",
+      highPara: "Our key features include speed, security, and scalability.",
+      middleImages: "https://via.placeholder.com/300",
+      endPara: "These features make us stand out from the competition.",
+      gap: 10
+    },
+    {
+      id: "section3",
+      title: "Usage",
+      highPara: "You can start using the platform by signing up.",
+      middleImages:
+        "https://via.placeholder.com/200,https://via.placeholder.com/200,https://via.placeholder.com/200",
+      endPara: "The usage process is streamlined for your convenience.",
+      gap: 10
+    },
+    {
+      id: "section4",
+      title: "Conclusion",
+      highPara: "Thanks for taking the time to learn about our platform.",
+      middleImages: "",
+      endPara: "Feel free to reach out with any questions!",
+      gap: 10 
+    },
+  ], []);
+
+
 
   const [activeId, setActiveId] = useState(null);
   const [showIndexMobile, setShowIndexMobile] = useState(false);
@@ -51,7 +87,7 @@ const ContentPage = () => {
       }}
     >
       {/* Large Screen Dock */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block w-1/4 p-3 h-[94vh] ">
         <Dock sections={sections} activeId={activeId} />
       </div>
 
@@ -108,7 +144,7 @@ const ContentPage = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 w-72 bg-gradient-to-br from-[#111111cc] to-[#1c1c1ccc] backdrop-blur-lg border-l border-white/20 z-50 p-4 overflow-y-auto rounded-l-2xl shadow-xl"
+              className="fixed top-0 right-0 bottom-0 w-96 bg-gradient-to-br from-[#111111cc] to-[#1c1c1ccc] backdrop-blur-lg border-l border-white/20 z-50 p-4 overflow-y-auto rounded-l-2xl shadow-xl"
             >
               <h3 className="text-xl font-bold text-white mb-5 border-b border-white/10 pb-2">
                 Index
@@ -119,10 +155,9 @@ const ContentPage = () => {
                     key={idx}
                     onClick={() => scrollToSection(section.id)}
                     className={`relative w-full text-left cursor-pointer rounded-lg px-4 py-3 transition-colors duration-300
-                      ${
-                        activeId === section.id
-                          ? "bg-blue-600 text-white font-bold shadow-[0_0_12px_#3b82f6]"
-                          : "text-white/80 hover:bg-white/10"
+                      ${activeId === section.id
+                        ? "bg-blue-600 text-white font-bold shadow-[0_0_12px_#3b82f6]"
+                        : "text-white/80 hover:bg-white/10"
                       }
                       backdrop-blur-sm`}
                   >
@@ -138,23 +173,69 @@ const ContentPage = () => {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="flex-1 h-screen overflow-y-scroll p-6 space-y-20 lg:ml-[260px]"
+        className="flex-1 h-screen overflow-y-scroll px-10 py-4 space-y-20"
       >
-        <div className="bg-white bg-opacity-80 text-black p-10 rounded-[1rem]">
+        <div className="bg-white bg-opacity-80 text-black p-10 shadow-lg rounded-[1rem]">
           {sections.map((section) => (
-            <div key={section.id} id={section.id} className="min-h-screen">
-              <h2 className="text-3xl font-bold mb-4">{section.title}</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                tristique consequat placerat. Vestibulum auctor pellentesque sem,
-                eu posuere erat hendrerit quis. Maecenas vel consequat turpis.
-                Nam facilisis, ligula in mattis sodales, augue justo tristique
-                nulla, sed lacinia ante eros ut mi.
-              </p>
+            <div
+              key={section.id}
+              id={section.id}
+              style={{ marginBottom: `${section.gap ?? 0}rem` }}
+            >
+
+              {/* Title */}
+              {section.title && (
+                <h2 className="text-3xl font-bold mb-4">{section.title}</h2>
+              )}
+
+              {/* High-level Paragraph */}
+              {section.highPara && (
+                <p className="text-lg mb-6 text-gray-800 leading-relaxed">
+                  {section.highPara}
+                </p>
+              )}
+
+              {/* Images Grid */}
+              {section.middleImages &&
+                section.middleImages.trim() !== "" &&
+                (() => {
+                  const images = section.middleImages
+                    .split(",")
+                    .map((url) => url.trim())
+                    .filter(Boolean);
+                  const cols =
+                    images.length === 1
+                      ? "grid-cols-1"
+                      : images.length === 2
+                        ? "grid-cols-2"
+                        : "grid-cols-3";
+
+                  return (
+                    <div className={`grid ${cols} gap-4 mb-6`}>
+                      {images.map((img, idx) => (
+                        <img
+                          key={idx}
+                          src={img}
+                          alt={`Section ${section.id} - image ${idx + 1}`}
+                          className="w-full h-auto rounded-lg shadow-md object-cover"
+                          loading="lazy"
+                        />
+                      ))}
+                    </div>
+                  );
+                })()}
+
+              {/* End Paragraph */}
+              {section.endPara && (
+                <p className="text-base text-gray-700 leading-relaxed">
+                  {section.endPara}
+                </p>
+              )}
             </div>
           ))}
         </div>
       </div>
+
     </section>
   );
 };
