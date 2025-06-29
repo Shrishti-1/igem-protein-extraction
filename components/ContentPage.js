@@ -12,10 +12,10 @@ const ContentPage = () => {
       id: "section1",
       title: "Abhyudaya",
       highPara: "Welcome to our platform. Here’s what you need to know.",
-      middleImages:
-        "https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg,https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg,https://4kwallpapers.com/images/walls/thumbs_3t/22714.jpg",
+      // middleImages:
+      //   "https://images.pexels.com/photos/1870376/pexels-photo-1870376.jpeg?_gl=1*bi5slv*_ga*MjUwMzQ1MzA4LjE3NTA5NTcyMjk.*_ga_8JE65Q40S6*czE3NTA5NTcyMjgkbzEkZzEkdDE3NTA5NTcyMzMkajU1JGwwJGgw,/background.jpg,/background.jpg",
       endPara: "We hope this introduction gives you a good start.",
-      gap: 10
+      // gap: 10
     },
     {
       id: "section2",
