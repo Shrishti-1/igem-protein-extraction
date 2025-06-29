@@ -34,7 +34,7 @@ const Page = () => {
             src="https://www.purrfectcatgifts.co.uk/cdn/shop/collections/Funny_Cat_Cards_640x640.png?v=1663150894"
             alt="Funny Cat"
             width={640}
-            height={320}
+            height={620}
             className="w-full max-w-md h-auto object-cover rounded-xl mt-4"
           />
 
