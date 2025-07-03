@@ -4,31 +4,29 @@ import GlossaryItem from './GloassaryItem';
 
 const Module1 = () => {
   return (
-    <>
-    <div className="max-w-3xl mx-auto px-4 py-8 space-y-10">
-      
+    <div className=" min-h-screen w-full text-white px-4 py-8 sm:px-6 lg:px-8 space-y-10">
       {/* Doctor with Speech Bubble */}
-      <div className="flex items-start gap-6">
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start gap-6">
         <Image
           src="/doctor1.png"
           alt="Doctor illustration"
           width={129}
           height={129}
-          className="rounded-lg object-contain"
+          className="rounded-lg object-contain flex-shrink-0"
           priority
         />
-        <div className="relative bg-white text-black px-5 py-3 rounded-xl shadow-md max-w-xs">
+        <div className="relative bg-neutral-800 text-white px-5 py-3 rounded-xl shadow-md max-w-md">
           <p className="text-md font-medium leading-relaxed">
             We want to make a special protein from bacteria to help solve a problem (like making insulin or a specific enzyme).
           </p>
           {/* Speech bubble arrow */}
-          <div className="absolute left-[-12px] top-5 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white" />
+          <div className="absolute left-[-12px] top-5 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-neutral-800" />
         </div>
       </div>
 
       {/* Glossary Section */}
-<section className="bg-white rounded-xl p-6 shadow-md max-w-xl mx-auto space-y-6 max-h-96 overflow-y-auto">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">🧬 Quick Glossary</h2>
+      <section className=" rounded-xl p-6 shadow-md max-w-4xl mx-auto space-y-6 max-h-[32rem] overflow-y-auto">
+        <h2 className="text-2xl font-semibold text-white mb-4">🧬 Quick Glossary</h2>
 
         <GlossaryItem
           term="Gene"
@@ -51,8 +49,7 @@ const Module1 = () => {
           imageSrc="/images/dna.png"
         />
       </section>
-      </div>
-      </>
+    </div>
   );
 };
 
