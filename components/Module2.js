@@ -15,7 +15,7 @@ const Module2 = () => {
                 />
                 <div className="relative bg-neutral-800 text-white px-4 py-3 rounded-xl shadow-md w-full">
                     <p className="text-sm sm:text-md font-medium leading-relaxed">
-                        We want to make a special protein from bacteria to help solve a problem (like making insulin or a specific enzyme).
+                        Now we will simulate isolating the genomic DNA from a chosen bacterium.
                     </p>
                     {/* Speech bubble arrow */}
                     <div className="absolute left-[-10px] top-5 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-neutral-800" />
