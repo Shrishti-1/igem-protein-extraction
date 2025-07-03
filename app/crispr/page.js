@@ -3,12 +3,13 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Stepper, { Step } from '@/components/Stepper';
+import Module1 from '@/components/Module1';
 
 const Page = () => {
   const [name, setName] = useState('');
 
   return (
-    <div className="text-white p-6 min-h-screen w-full bg-[#111]">
+    <div className="text-white p-[11rem] min-h-screen  w-full bg-[#111]">
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
@@ -21,8 +22,8 @@ const Page = () => {
         <Step>
 
           <Step>
-            <h2 className="text-xl font-bold">Step 1: DNA Isolation</h2>
-            <p className="text-sm mb-4">Watch how bacterial cells are lysed to extract genetic material.</p>
+          
+            <Module1/>
           </Step>
 
         </Step>
