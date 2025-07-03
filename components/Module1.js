@@ -4,6 +4,7 @@ import GlossaryItem from './GloassaryItem';
 
 const Module1 = () => {
   return (
+    <>
     <div className="max-w-3xl mx-auto px-4 py-8 space-y-10">
       
       {/* Doctor with Speech Bubble */}
@@ -50,7 +51,8 @@ const Module1 = () => {
           imageSrc="/images/dna.png"
         />
       </section>
-    </div>
+      </div>
+      </>
   );
 };
 

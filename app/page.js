@@ -9,7 +9,7 @@ const Page = () => {
   const [name, setName] = useState('');
 
   return (
-    <div className="text-white p-[11rem] min-h-screen  w-full bg-[#111]">
+    <div className="text-white md:p-[11rem] min-h-screen  w-full bg-[#111]">
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
