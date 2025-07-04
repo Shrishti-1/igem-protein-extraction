@@ -24,7 +24,7 @@ const Module4Step3 = ({ onDone }) => {
       <div className="max-w-3xl mx-auto text-center space-y-6">
         <h2 className="text-3xl font-bold text-yellow-300">🧫 Selection (Antibiotic Plate)</h2>
         <p className="text-lg text-gray-300">
-          Drag the <strong>E. coli</strong> onto one of the agar plates. Let's see who survives!
+          Drag the <strong>E. coli</strong> onto one of the agar plates. Let&apos;s see who survives!
         </p>
 
         {/* Plates */}

@@ -7,6 +7,8 @@ import Module1 from '@/components/Module1';
 import Module2 from '@/components/Module2';
 import Module3 from '@/components/Module3';
 import Module4 from '@/components/Module4';
+import Module5 from '@/components/Module5';
+import Module6 from '@/components/Module6';
 
 const Page = () => {
   const [name, setName] = useState('');
@@ -48,12 +50,11 @@ const Page = () => {
 <Module4/>
         </Step>
         <Step>
-          <h2 className="text-2xl font-semibold mb-2">Final Step</h2>
-          <p>You made it!</p>
+        
+          <Module5/>
         </Step>
         <Step>
-          <h2 className="text-2xl font-semibold mb-2">Final Step</h2>
-          <p>You made it 6th!</p>
+          <Module6/>
         </Step>
         <Step>
           <h2 className="text-2xl font-semibold mb-2">Final Step</h2>
