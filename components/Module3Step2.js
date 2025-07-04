@@ -27,7 +27,7 @@ const Module3Step2 = ({ onDone }) => {
       setResult("🧪 Not enough copies! Try a higher cycle.");
       copyCount = 2;
     } else if (cycleLevel === "medium") {
-      setResult("✅ Good! You’ve got enough copies.");
+      setResult("✅ Good! You&apos;ve got enough copies.");
       copyCount = 6;
     } else {
       setResult("🚀 Great! Loads of gene copies generated!");
