@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import Stepper, { Step } from '@/components/Stepper';
 import Module1 from '@/components/Module1';
 import Module2 from '@/components/Module2';
+import Module3 from '@/components/Module3';
+import Module4 from '@/components/Module4';
 
 const Page = () => {
   const [name, setName] = useState('');
@@ -13,7 +15,7 @@ const Page = () => {
     <div
       className="text-white md:p-[11rem] min-h-screen w-full bg-[#111]"
       style={{
-        backgroundImage: "url('/lab.jpg')",
+        backgroundImage: "url('/labo.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -39,18 +41,11 @@ const Page = () => {
         </Step>
 
         <Step>
-          <h2 className="text-2xl font-semibold mb-2">How about an input?</h2>
-          <input
-            className="mt-2 px-4 py-2 rounded-md bg-gray-800 border border-gray-600 text-white w-full"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your name?"
-          />
+         <Module3/>
         </Step>
 
         <Step>
-          <h2 className="text-2xl font-semibold mb-2">Final Step</h2>
-          <p>You made it!</p>
+<Module4/>
         </Step>
         <Step>
           <h2 className="text-2xl font-semibold mb-2">Final Step</h2>

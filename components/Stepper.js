@@ -116,7 +116,7 @@ export default function Stepper({
         {/* Footer Navigation Buttons */}
         {!isCompleted && (
           <div
-            className={`fixed bottom-4 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
+            className={`fixed bottom-0 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
           >
             <div
               className="max-w-5xl mx-auto flex justify-between items-center bg-white/30 backdrop-blur-sm
@@ -126,7 +126,7 @@ export default function Stepper({
               {currentStep !== 1 && (
                 <button
                   onClick={handleBack}
-                  className="text-sm sm:text-base px-4 py-2 rounded-lg text-neutral-500 hover:text-neutral-800 dark:hover:text-white transition"
+                  className="text-sm sm:text-base px-4 py-2 rounded-full cursor-pointer text-white bg-blue-500 hover:bg-blue-600 dark:hover:text-white transition"
                   {...backButtonProps}
                 >
                   {backButtonText}
@@ -135,7 +135,7 @@ export default function Stepper({
               <div className="flex-1"></div>
               <button
                 onClick={isLastStep ? handleComplete : handleNext}
-                className="text-sm sm:text-base px-6 py-2 rounded-full font-semibold text-white bg-green-500 hover:bg-green-600 active:bg-green-700 transition"
+                className="text-sm sm:text-base px-6 py-2 rounded-full font-semibold text-white bg-green-500 cursor-pointer hover:bg-green-600 active:bg-green-700 transition"
                 {...nextButtonProps}
               >
                 {isLastStep ? "Complete" : nextButtonText}
