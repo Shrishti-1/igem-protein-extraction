@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Dock from "./Dock";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo } from "react";
+import Image from "next/image";
 
 const ContentPage = () => {
   // Generate 20 sections dynamically
@@ -40,7 +41,7 @@ const ContentPage = () => {
       highPara: "Thanks for taking the time to learn about our platform.",
       middleImages: "",
       endPara: "Feel free to reach out with any questions!",
-      gap: 10 
+      gap: 10
     },
   ], []);
 
@@ -213,10 +214,12 @@ const ContentPage = () => {
                   return (
                     <div className={`grid ${cols} gap-4 mb-6`}>
                       {images.map((img, idx) => (
-                        <img
+                        <Image
                           key={idx}
                           src={img}
                           alt={`Section ${section.id} - image ${idx + 1}`}
+                          width={800} // replace with actual image width or your preferred size
+                          height={600} // replace with actual image height
                           className="w-full h-auto rounded-lg shadow-md object-cover"
                           loading="lazy"
                         />
