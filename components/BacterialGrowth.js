@@ -124,7 +124,7 @@ const BacterialGrowth = ({ optimal, totalTime = 24 }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          ❌ The bacteria didn't grow well due to incorrect conditions.
+          ❌ The bacteria didn&apos;t grow well due to incorrect conditions.
           <br />
           Try setting <strong>37°C</strong> and <strong>24 hours</strong> for optimal growth.
         </motion.div>
