@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import CellHarvesting from "./CellHarvesting"; // ✅ Import your next phase component
+import CellHarvesting from "./CellHarvesting";
 
 const TOTAL_STAGES = 40;
 const FRAME_INTERVAL = 200;
@@ -10,36 +10,35 @@ const FRAME_INTERVAL = 200;
 const BacterialGrowth = ({ optimal, totalTime = 24 }) => {
   const [growthDots, setGrowthDots] = useState([]);
   const [elapsed, setElapsed] = useState(0);
-  const [showHarvesting, setShowHarvesting] = useState(false); // ✅ Phase switch
-
-  const intervalRef = useRef(null);
-  const hoursPerFrame = totalTime / TOTAL_STAGES;
+  const [showHarvesting, setShowHarvesting] = useState(false);
 
   useEffect(() => {
-    if (optimal) {
-      intervalRef.current = setInterval(() => {
-        setElapsed((prev) => {
-          const next = prev + hoursPerFrame;
-          if (next >= totalTime) {
-            clearInterval(intervalRef.current);
-            setShowHarvesting(true); // ✅ Show next phase
-            return totalTime;
-          }
-          return next;
-        });
+    if (!optimal) return;
 
-        setGrowthDots((prev) => [
-          ...prev,
-          {
-            top: 150 - prev.length * (120 / TOTAL_STAGES) + Math.random() * 5,
-            left: 10 + Math.random() * 50,
-            id: Date.now() + Math.random(),
-          },
-        ]);
-      }, FRAME_INTERVAL);
-    }
+    const hoursPerFrame = totalTime / TOTAL_STAGES;
 
-    return () => clearInterval(intervalRef.current);
+    const interval = setInterval(() => {
+      setElapsed((prev) => {
+        const next = prev + hoursPerFrame;
+        if (next >= totalTime) {
+          clearInterval(interval);
+          setShowHarvesting(true);
+          return totalTime;
+        }
+        return next;
+      });
+
+      setGrowthDots((prev) => [
+        ...prev,
+        {
+          top: 150 - prev.length * (120 / TOTAL_STAGES) + Math.random() * 5,
+          left: 10 + Math.random() * 50,
+          id: Date.now() + Math.random(),
+        },
+      ]);
+    }, FRAME_INTERVAL);
+
+    return () => clearInterval(interval);
   }, [optimal, totalTime]);
 
   const formatTime = (time) => {
@@ -48,7 +47,6 @@ const BacterialGrowth = ({ optimal, totalTime = 24 }) => {
     return `${hours}h ${minutes}m`;
   };
 
-  // ✅ If growth phase is done, render harvesting directly
   if (showHarvesting) return <CellHarvesting />;
 
   return (
@@ -56,7 +54,6 @@ const BacterialGrowth = ({ optimal, totalTime = 24 }) => {
       <h2 className="text-2xl font-semibold">🧫 Bacterial Growth Simulation</h2>
 
       <div className="flex items-center justify-center gap-12 w-full max-w-3xl">
-        {/* Test Tube with bacteria */}
         <div className="relative w-24 h-48 border-4 border-white rounded-b-full rounded-t-md bg-gradient-to-b from-blue-100 via-white to-blue-50 overflow-hidden shadow-lg">
           {optimal &&
             growthDots.map((dot) => (
@@ -74,7 +71,6 @@ const BacterialGrowth = ({ optimal, totalTime = 24 }) => {
             ))}
         </div>
 
-        {/* Clock */}
         <div className="flex flex-col items-center justify-center">
           <div className="relative w-28 h-28">
             <svg className="transform -rotate-90 w-full h-full">
