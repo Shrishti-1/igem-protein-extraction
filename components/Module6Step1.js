@@ -7,9 +7,7 @@ const Module5Step5 = ({ onDone }) => {
   const [lysed, setLysed] = useState(false);
 
   const handleLysis = () => {
-    if (!lysed) {
-      setLysed(true);
-    }
+    if (!lysed) setLysed(true);
   };
 
   return (
@@ -22,31 +20,40 @@ const Module5Step5 = ({ onDone }) => {
           Time to break open the cells and collect our protein! Click the button to lyse the cells.
         </p>
 
-        {/* Lysis Image / Animation */}
+        {/* Lysis Animation Area */}
         <div className="relative w-64 h-64 mx-auto mt-4">
-          <Image
-            src="/bl21coli.png"
-            alt="E. coli Cell"
-            width={200}
-            height={200}
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ${
-              lysed ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
-            }`}
-          />
+          {/* Cell image */}
+          {!lysed && (
+            <Image
+              src="/ecoli.png"
+              alt="E. coli Cell"
+              width={200}
+              height={200}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 z-10"
+            />
+          )}
 
-          {/* Protein blobs animation */}
+          {/* Burst protein blobs */}
           {lysed &&
-            Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className={`absolute w-5 h-5 rounded-full bg-pink-400 animate-blob`}
-                style={{
-                  left: `${50 + 30 * Math.cos((i / 8) * 2 * Math.PI)}%`,
-                  top: `${50 + 30 * Math.sin((i / 8) * 2 * Math.PI)}%`,
-                  animationDelay: `${i * 0.1}s`,
-                }}
-              />
-            ))}
+            Array.from({ length: 10 }).map((_, i) => {
+              const angle = (i / 10) * 2 * Math.PI;
+              const x = 90 * Math.cos(angle); // radial distance
+              const y = 90 * Math.sin(angle);
+              const delay = i * 0.1;
+
+              return (
+                <div
+                  key={i}
+                  className="absolute w-5 h-5 bg-pink-500 rounded-full animate-blob"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(${x}%, ${y}%)`,
+                    animationDelay: `${delay}s`,
+                  }}
+                />
+              );
+            })}
         </div>
 
         {/* Lysis Button */}
@@ -82,20 +89,19 @@ const Module5Step5 = ({ onDone }) => {
       {/* Animations */}
       <style jsx>{`
         .animate-blob {
-          animation: blob-pop 0.6s ease-out forwards;
+          animation: flyOut 0.7s ease-out forwards;
         }
 
-        @keyframes blob-pop {
+        @keyframes flyOut {
           0% {
-            transform: scale(0.2);
-            opacity: 0;
+            transform: translate(0%, 0%) scale(0.2);
+            opacity: 0.3;
           }
           50% {
-            transform: scale(1.3);
+            transform: translate(30%, 30%) scale(1.3);
             opacity: 1;
           }
           100% {
-            transform: scale(1);
             opacity: 1;
           }
         }

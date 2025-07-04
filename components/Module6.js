@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Module6Step1 from "./Module6Step1";
+import Module6Step2 from "./Module6Step2";
 
 
 const steps = [
   { id: 1, component: Module6Step1 },
-  // { id: 2, component: Module6Step2 },
+  { id: 2, component: Module6Step2 },
   // { id: 3, component: Module6Step3 },
   // { id: 4, component: Module6Step4 },
 ];

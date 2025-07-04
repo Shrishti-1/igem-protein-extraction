@@ -13,7 +13,7 @@ const ChoosingEcoliStep = ({ onDone }) => {
         {/* Title */}
         <h2 className="text-3xl font-bold text-yellow-300">🦠 Choosing the Right E. coli</h2>
         <p className="text-lg text-gray-300 max-w-xl mx-auto">
-          Not all E. coli are the same! Let's pick the best one to express our protein.
+          Not all E. coli are the same! Let&apos;s pick the best one to express our protein.
         </p>
 
         {/* Visual Comparison */}

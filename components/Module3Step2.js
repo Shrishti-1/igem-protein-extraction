@@ -40,7 +40,7 @@ const Module3Step2 = ({ onDone }) => {
     <div className="space-y-6 p-4 text-white bg-gradient-to-br from-[#1e293b] to-[#0f172a] min-h-screen">
       <h2 className="text-3xl font-bold text-yellow-300">🧬 Finding Our Gene (PCR)</h2>
       <p className="text-lg text-gray-300">
-        Drag the tools into the PCR machine and choose a cycle level to amplify the <strong>"Protein X"</strong> gene!
+        Drag the tools into the PCR machine and choose a cycle level to amplify the <strong>&quot;Protein X&quot;</strong> gene!
       </p>
 
       {/* DNA Strand with Highlight */}
