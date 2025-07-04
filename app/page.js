@@ -10,7 +10,15 @@ const Page = () => {
   const [name, setName] = useState('');
 
   return (
-    <div className="text-white md:p-[11rem] min-h-screen  w-full bg-[#111]">
+    <div
+      className="text-white md:p-[11rem] min-h-screen w-full bg-[#111]"
+      style={{
+        backgroundImage: "url('/lab.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
@@ -21,16 +29,13 @@ const Page = () => {
         nextButtonText="Next"
       >
         <Step>
-
           <Step>
-          
-            <Module1/>
+            <Module1 />
           </Step>
-
         </Step>
 
         <Step>
-           <Module2/>
+          <Module2 />
         </Step>
 
         <Step>

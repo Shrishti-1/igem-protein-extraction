@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, Children, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -53,10 +53,23 @@ export default function Stepper({
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen w-full px-4 sm:px-6 lg:px-20 py-8 bg-white dark:bg-neutral-900" {...rest}>
-      <div className={`w-full max-w-5xl rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 ${stepCircleContainerClassName}`}>
+    <div
+      className="flex flex-col items-center justify-start min-h-screen w-full px-4 sm:px-6 lg:px-20 py-8
+                 bg-white/30 backdrop-blur-sm
+                 dark:bg-neutral-900/30 dark:backdrop-blur-sm"
+      {...rest}
+    >
+      <div
+        className={`w-full max-w-5xl rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800
+                   bg-white/30 backdrop-blur-sm
+                   dark:bg-neutral-900/30 dark:backdrop-blur-sm
+                   ${stepCircleContainerClassName}`}
+      >
         {/* Step Indicators */}
-        <div className={`flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-4 sm:px-6 pt-6 ${stepContainerClassName}`}>
+        <div
+          className={`flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-4 sm:px-6 pt-6
+                     ${stepContainerClassName}`}
+        >
           {stepsArray.map((_, index) => {
             const stepNumber = index + 1;
             const isNotLastStep = index < totalSteps - 1;
@@ -82,7 +95,9 @@ export default function Stepper({
                     }}
                   />
                 )}
-                {isNotLastStep && <StepConnector isComplete={currentStep > stepNumber} />}
+                {isNotLastStep && (
+                  <StepConnector isComplete={currentStep > stepNumber} />
+                )}
               </React.Fragment>
             );
           })}
@@ -100,8 +115,14 @@ export default function Stepper({
 
         {/* Footer Navigation Buttons */}
         {!isCompleted && (
-          <div className={`fixed bottom-4 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}>
-            <div className="max-w-5xl mx-auto flex justify-between items-center bg-white dark:bg-neutral-800 rounded-xl shadow-lg px-4 py-2">
+          <div
+            className={`fixed bottom-4 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
+          >
+            <div
+              className="max-w-5xl mx-auto flex justify-between items-center bg-white/30 backdrop-blur-sm
+                         dark:bg-neutral-800/30 dark:backdrop-blur-sm
+                         rounded-xl shadow-lg px-4 py-2"
+            >
               {currentStep !== 1 && (
                 <button
                   onClick={handleBack}
@@ -139,7 +160,11 @@ function StepContentWrapper({ isCompleted, currentStep, direction, children, cla
     >
       <AnimatePresence initial={false} mode="sync" custom={direction}>
         {!isCompleted && (
-          <SlideTransition key={currentStep} direction={direction} onHeightReady={(h) => setParentHeight(h)}>
+          <SlideTransition
+            key={currentStep}
+            direction={direction}
+            onHeightReady={(h) => setParentHeight(h)}
+          >
             {children}
           </SlideTransition>
         )}
@@ -182,7 +207,8 @@ export function Step({ children }) {
 }
 
 function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }) {
-  const status = currentStep === step ? "active" : currentStep < step ? "inactive" : "complete";
+  const status =
+    currentStep === step ? "active" : currentStep < step ? "inactive" : "complete";
   const handleClick = () => {
     if (step !== currentStep && !disableStepIndicators) onClickStep(step);
   };
