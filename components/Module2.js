@@ -66,9 +66,9 @@ const Module2 = () => {
 
   return (
     <div className="px-4 py-8 max-w-5xl mx-auto min-h-screen space-y-10 text-white">
-     <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text p-3 rounded-full text-center shadow-lg hover:scale-105 transform transition-all">
-  Gene Extraction from 'Bacteria A'
-</div>
+      <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text p-3 rounded-full text-center shadow-lg hover:scale-105 transform transition-all">
+        Gene Extraction from &apos;Bacteria A&apos;
+      </div>
 
       {step === 0 && (
         <>
@@ -108,7 +108,7 @@ const Module2 = () => {
                   draggable={false}
                   priority
                 />
-                <h1>Culture of Bacteria A</h1>
+                <h1>Culture of &apos;Bacteria A&apos;</h1> {/* Escaped single quotes */}
               </div>
             </Draggable>
 
@@ -180,13 +180,10 @@ const Module2 = () => {
 
       {step === 2 && (
         <CellHarvesting onDone={() => setStep(step + 1)} />
-
       )}
 
       {step === 3 && (
-        <Lysis
-          onDone={onStepDone}
-        />
+        <Lysis onDone={onStepDone} />
       )}
 
       {step > 3 && (
