@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Children } from "react";
+import React, { useState, Children, useEffect, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Stepper({
@@ -20,7 +20,7 @@ export default function Stepper({
   renderStepIndicator,
   ...rest
 }) {
-  // Initialize step state with a fallback to initialStep
+  // State to store the current step
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [direction, setDirection] = useState(0);
   const stepsArray = Children.toArray(children);
@@ -28,15 +28,15 @@ export default function Stepper({
   const isCompleted = currentStep > totalSteps;
   const isLastStep = currentStep === totalSteps;
 
-  // Get current step from localStorage if it's available
+  // Load the saved step from localStorage on client-side
   useEffect(() => {
     const storedStep = localStorage.getItem("currentStep");
     if (storedStep) {
       setCurrentStep(parseInt(storedStep));  // Load saved step from localStorage
     }
-  }, []);
+  }, []);  // Empty array ensures this runs only once after initial mount (client-side)
 
-  // Update step and store it in localStorage
+  // Update the step and save it to localStorage
   const updateStep = (newStep) => {
     setCurrentStep(newStep);
     if (newStep > totalSteps) {
