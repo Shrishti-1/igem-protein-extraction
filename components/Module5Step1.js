@@ -7,7 +7,7 @@ const ChoosingEcoliStep = ({ onDone }) => {
   const [selected, setSelected] = useState(null);
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-8 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1f2937] text-white">
+    <div className="h-[2000px] py-12 px-4 sm:px-8 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1f2937] text-white">
       <div className="max-w-4xl mx-auto text-center space-y-8">
 
         {/* Title */}
