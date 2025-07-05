@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 
 const Module3Step2 = ({ onDone }) => {
   const [plasmidDropped, setPlasmidDropped] = useState(false);
   const [successCount, setSuccessCount] = useState(0);
 
-  const handleDrop = () => {
+  const handlePlasmidClick = () => {
     if (!plasmidDropped) {
       setPlasmidDropped(true);
       setSuccessCount(Math.floor(Math.random() * 3) + 2); // 2 to 4 successes
@@ -19,15 +19,11 @@ const Module3Step2 = ({ onDone }) => {
       <div className="max-w-3xl mx-auto space-y-6 text-center">
         <h2 className="text-3xl font-bold text-yellow-300">🧬 Transformation</h2>
         <p className="text-lg text-gray-300">
-          Drag the <strong>Recombinant Plasmid</strong> into the prepared <strong>E. coli</strong> tube. Only some cells will take it in!
+          Click to place the <strong>Recombinant Plasmid</strong> into the prepared <strong>E. coli</strong> tube. Only some cells will take it in!
         </p>
 
         {/* E. coli Tube Drop Zone */}
-        <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDrop}
-          className="relative mx-auto mt-6 w-60 h-60 rounded-xl border-4 border-dashed border-green-400 bg-white/10 backdrop-blur flex items-center justify-center transition"
-        >
+        <div className="relative mx-auto mt-6 w-60 h-60 rounded-xl border-4 border-dashed border-green-400 bg-white/10 backdrop-blur flex items-center justify-center transition">
           <Image
             src="/ecoliTube.png"
             alt="E. coli Tube"
@@ -35,19 +31,17 @@ const Module3Step2 = ({ onDone }) => {
             objectFit="contain"
             className="rounded-xl pointer-events-none opacity-80"
           />
-
           <div className="z-10 text-white font-semibold text-lg">🧪 E. coli Cells</div>
         </div>
 
-        {/* Draggable Plasmid */}
+        {/* Clickable Plasmid */}
         {!plasmidDropped && (
-          <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData('text', 'plasmid')}
-            className="mx-auto mt-6 bg-blue-500 text-white px-6 py-3 rounded-full font-bold shadow hover:scale-105 transition cursor-move"
+          <button
+            onClick={handlePlasmidClick}
+            className="mx-auto mt-6 bg-blue-500 text-white px-6 py-3 rounded-full font-bold shadow hover:scale-105 transition cursor-pointer"
           >
             🧬 Recombinant Plasmid
-          </div>
+          </button>
         )}
 
         {/* Animation: plasmid success */}
@@ -63,8 +57,8 @@ const Module3Step2 = ({ onDone }) => {
                   key={i}
                   className={`w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-500 ${
                     i < successCount
-                      ? 'bg-green-500 animate-bounce text-white'
-                      : 'bg-gray-500 text-gray-300 opacity-60'
+                      ? "bg-green-500 animate-bounce text-white"
+                      : "bg-gray-500 text-gray-300 opacity-60"
                   }`}
                 >
                   🦠

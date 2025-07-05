@@ -5,12 +5,20 @@ import Image from "next/image";
 
 const Module4Step3 = ({ onDone }) => {
   const [selectedPlate, setSelectedPlate] = useState(null);
-  const [dropped, setDropped] = useState(false);
+  const [placed, setPlaced] = useState(false);
   const [result, setResult] = useState("");
+  const [showPrompt, setShowPrompt] = useState(false);
 
-  const handleDrop = (plateType) => {
+  // Handle E. coli culture click
+  const handleEcoliClick = () => {
+    setShowPrompt(true);
+  };
+
+  // Handle plate selection and placement of E. coli
+  const handlePlateSelect = (plateType) => {
     setSelectedPlate(plateType);
-    setDropped(true);
+    setPlaced(true);
+    setShowPrompt(false);
 
     if (plateType === "antibiotic") {
       setResult("✅ Only transformed E. coli survived and formed colonies!");
@@ -24,16 +32,35 @@ const Module4Step3 = ({ onDone }) => {
       <div className="max-w-3xl mx-auto text-center space-y-6">
         <h2 className="text-3xl font-bold text-yellow-300">🧫 Selection (Antibiotic Plate)</h2>
         <p className="text-lg text-gray-300">
-          Drag the <strong>E. coli</strong> onto one of the agar plates. Let&apos;s see who survives!
+          Click on the <strong>E. coli</strong> to decide where to place it and see who survives!
         </p>
+
+        {/* Show Plate Selection Prompt */}
+        {showPrompt && (
+          <div className="mt-6 bg-white/10 border border-white/20 backdrop-blur-md rounded-xl p-6 shadow-lg">
+            <h3 className="text-xl text-yellow-300 font-semibold">Where would you like to place the E. coli?</h3>
+            <div className="flex justify-center gap-8 mt-6">
+              <button
+                onClick={() => handlePlateSelect("antibiotic")}
+                className="w-36 h-36 rounded-full flex items-center justify-center bg-green-400 text-white font-bold hover:bg-green-500 transition-all duration-300 shadow-lg"
+              >
+                With Antibiotic
+              </button>
+              <button
+                onClick={() => handlePlateSelect("no-antibiotic")}
+                className="w-36 h-36 rounded-full flex items-center justify-center bg-red-400 text-white font-bold hover:bg-red-500 transition-all duration-300 shadow-lg"
+              >
+                No Antibiotic
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Plates */}
         <div className="flex flex-wrap justify-center gap-8 mt-8">
           {/* Antibiotic Plate */}
           <div
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => handleDrop("antibiotic")}
-            className="relative w-52 h-52 bg-white/10 border-4 border-green-400 border-dashed rounded-full flex items-center justify-center backdrop-blur-md shadow-inner"
+            className={`relative w-52 h-52 bg-white/10 border-4 border-green-400 border-dashed rounded-full flex items-center justify-center backdrop-blur-md shadow-inner ${selectedPlate === "antibiotic" && placed ? "animate-pulse" : ""}`}
           >
             <Image
               src="/antibiotic-plate.png"
@@ -44,7 +71,7 @@ const Module4Step3 = ({ onDone }) => {
             />
             <div className="z-10 font-semibold text-green-300">With Antibiotic</div>
 
-            {selectedPlate === "antibiotic" && dropped && (
+            {selectedPlate === "antibiotic" && placed && (
               <div className="absolute inset-0 flex flex-wrap justify-center items-center gap-2 p-4 animate-fadeIn">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div
@@ -58,9 +85,7 @@ const Module4Step3 = ({ onDone }) => {
 
           {/* No Antibiotic Plate */}
           <div
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => handleDrop("no-antibiotic")}
-            className="relative w-52 h-52 bg-white/10 border-4 border-red-400 border-dashed rounded-full flex items-center justify-center backdrop-blur-md shadow-inner"
+            className={`relative w-52 h-52 bg-white/10 border-4 border-red-400 border-dashed rounded-full flex items-center justify-center backdrop-blur-md shadow-inner ${selectedPlate === "no-antibiotic" && placed ? "animate-pulse" : ""}`}
           >
             <Image
               src="/plain-plate.png"
@@ -71,7 +96,7 @@ const Module4Step3 = ({ onDone }) => {
             />
             <div className="z-10 font-semibold text-red-300">No Antibiotic</div>
 
-            {selectedPlate === "no-antibiotic" && dropped && (
+            {selectedPlate === "no-antibiotic" && placed && (
               <div className="absolute inset-0 flex flex-wrap justify-center items-center gap-1 p-3 animate-fadeIn">
                 {Array.from({ length: 20 }).map((_, i) => (
                   <div
@@ -84,15 +109,14 @@ const Module4Step3 = ({ onDone }) => {
           </div>
         </div>
 
-        {/* E. coli to drag */}
-        {!dropped && (
-          <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData("text", "ecoli")}
-            className="mx-auto mt-6 bg-blue-500 text-white px-6 py-3 rounded-full font-bold shadow hover:scale-105 transition cursor-move w-fit"
+        {/* E. coli Culture to Click */}
+        {!placed && !showPrompt && (
+          <button
+            onClick={handleEcoliClick}
+            className="mx-auto mt-6 bg-blue-500 text-white px-6 py-3 rounded-full font-bold shadow hover:scale-105 transition cursor-pointer"
           >
             🦠 E. coli Culture
-          </div>
+          </button>
         )}
 
         {/* Result */}
@@ -103,7 +127,7 @@ const Module4Step3 = ({ onDone }) => {
         )}
 
         {/* Done */}
-        {/* {dropped && (
+        {/* {placed && (
           <div className="text-center mt-10">
             <button
               onClick={onDone}

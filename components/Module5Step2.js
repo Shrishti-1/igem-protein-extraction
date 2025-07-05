@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-const InductionStep = ({ onDone }) => {
+const Module5Step2 = ({ onDone }) => {
   const [iptgAdded, setIptgAdded] = useState(false);
   const [transcriptionStarted, setTranscriptionStarted] = useState(false);
   const [translationStarted, setTranslationStarted] = useState(false);
@@ -92,4 +92,4 @@ const InductionStep = ({ onDone }) => {
   );
 };
 
-export default InductionStep;
+export default Module5Step2;

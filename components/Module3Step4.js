@@ -8,7 +8,7 @@ const Module3Step4 = ({ onDone }) => {
   const [ligaseDropped, setLigaseDropped] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleDrop = (type) => {
+  const handleClick = (type) => {
     if (type === "gene") setGeneInserted(true);
     if (type === "ligase") setLigaseDropped(true);
   };
@@ -25,39 +25,35 @@ const Module3Step4 = ({ onDone }) => {
     <div className="min-h-screen bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white p-6 space-y-8">
       <h2 className="text-3xl font-bold text-yellow-300">🧬 Pasting DNA (Ligation)</h2>
       <p className="text-lg text-gray-300 max-w-2xl">
-        Drag the cut gene into the plasmid. Then add DNA Ligase to seal the sticky ends!
+        Click the tools and then select where to place them (Gene or Plasmid).
       </p>
 
-      {/* Tools to drag */}
+      {/* Tools to Click */}
       <div className="flex flex-wrap gap-4 justify-center mt-4">
         {!geneInserted && (
-          <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData("tool", "gene")}
-            className="bg-blue-500 text-white px-4 py-2 rounded-full shadow hover:scale-105 cursor-move"
+          <button
+            onClick={() => handleClick("gene")}
+            className="bg-blue-500 text-white px-4 py-2 rounded-full shadow hover:scale-105 cursor-pointer"
           >
             🧬 Cut Gene
-          </div>
+          </button>
         )}
         {!ligaseDropped && (
-          <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData("tool", "ligase")}
-            className="bg-green-500 text-white px-4 py-2 rounded-full shadow hover:scale-105 cursor-move"
+          <button
+            onClick={() => handleClick("ligase")}
+            className="bg-green-500 text-white px-4 py-2 rounded-full shadow hover:scale-105 cursor-pointer"
           >
             🧪 DNA Ligase
-          </div>
+          </button>
         )}
       </div>
 
       {/* Plasmid Drop Area */}
       <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => handleDrop(e.dataTransfer.getData("tool"))}
         className="relative w-full max-w-xl h-64 mx-auto mt-6 bg-white/10 border-4 border-dashed border-cyan-400 rounded-2xl flex items-center justify-center"
       >
         {!geneInserted ? (
-          <p className="text-center text-white text-lg">Drop 🧬 Gene Here</p>
+          <p className="text-center text-white text-lg">Click to place 🧬 Gene Here</p>
         ) : (
           <div className="relative w-64 h-64">
             <Image

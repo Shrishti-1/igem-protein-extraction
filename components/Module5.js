@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Module5Step1 from "./Module5Step1";
-import Module5Step2 from "./Module5Step2";
 import Module5Step3 from "./Module5Step3";
+import Module5Step2 from "./Module5Step2";
 
 const steps = [
   { id: 1, component: Module5Step1 },

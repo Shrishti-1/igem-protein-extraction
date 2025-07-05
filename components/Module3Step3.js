@@ -30,18 +30,26 @@ const Module3Step3 = ({ onDone }) => {
   const [plasmidEnzyme, setPlasmidEnzyme] = useState(null);
   const [feedback, setFeedback] = useState("");
   const [cutting, setCutting] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedEnzyme, setSelectedEnzyme] = useState(null);
 
-  const handleDrop = (target, enzyme) => {
+  const handleEnzymeClick = (enzyme) => {
+    setSelectedEnzyme(enzyme);
+    setShowPopup(true);
+  };
+
+  const handlePopupSelection = (target) => {
     if (target === "gene") {
-      setGeneEnzyme(enzyme);
-    } else {
-      setPlasmidEnzyme(enzyme);
+      setGeneEnzyme(selectedEnzyme);
+    } else if (target === "plasmid") {
+      setPlasmidEnzyme(selectedEnzyme);
     }
+    setShowPopup(false);
   };
 
   const handleCheck = () => {
     if (!geneEnzyme || !plasmidEnzyme) {
-      setFeedback("⚠️ Drop enzymes onto both gene and plasmid!");
+      setFeedback("⚠️ Select enzymes for both gene and plasmid!");
       return;
     }
 
@@ -58,10 +66,10 @@ const Module3Step3 = ({ onDone }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white p-6 space-y-6">
+    <div className=" pb-[300px] bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white p-6 space-y-6">
       <h2 className="text-3xl font-bold text-yellow-300">✂️ Cutting with Restriction Enzymes</h2>
       <p className="text-lg text-gray-300 max-w-2xl">
-        Drag restriction enzymes onto both the amplified gene and the plasmid to make matching sticky ends.
+        Click on an enzyme and then select where to place it (Gene or Plasmid).
       </p>
 
       {/* Enzyme Choices */}
@@ -69,10 +77,9 @@ const Module3Step3 = ({ onDone }) => {
         {Object.entries(enzymeOptions).map(([key, { label, color }]) => (
           <div
             key={key}
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData("enzyme", key)}
+            onClick={() => handleEnzymeClick(key)}
             className={clsx(
-              "cursor-move px-4 py-2 rounded-full text-white font-semibold shadow-md hover:scale-105 transition",
+              "cursor-pointer px-4 py-2 rounded-full text-white font-semibold shadow-md hover:scale-105 transition",
               color
             )}
           >
@@ -84,11 +91,7 @@ const Module3Step3 = ({ onDone }) => {
       {/* Drop Targets */}
       <div className="grid sm:grid-cols-2 gap-8 mt-8">
         {/* Gene */}
-        <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => handleDrop("gene", e.dataTransfer.getData("enzyme"))}
-          className="relative border-4 border-dashed border-blue-300 rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] bg-white/10"
-        >
+        <div className="relative border-4 border-dashed border-blue-300 rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] bg-white/10">
           <p className="mb-2 text-xl text-blue-200">Amplified Gene</p>
           <Image src="/gene.png" alt="Gene" width={200} height={100} />
           {geneEnzyme && (
@@ -104,11 +107,7 @@ const Module3Step3 = ({ onDone }) => {
         </div>
 
         {/* Plasmid */}
-        <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => handleDrop("plasmid", e.dataTransfer.getData("enzyme"))}
-          className="relative border-4 border-dashed border-green-300 rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] bg-white/10"
-        >
+        <div className="relative border-4 border-dashed border-green-300 rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] bg-white/10">
           <p className="mb-2 text-xl text-green-200">Plasmid</p>
           <Image src="/plasmid.png" alt="Plasmid" width={200} height={100} />
           {plasmidEnzyme && (
@@ -150,6 +149,29 @@ const Module3Step3 = ({ onDone }) => {
           ✅ Done
         </button>
       </div>
+
+      {/* Popup for enzyme placement */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-bold mb-4">Where do you want to place {enzymeOptions[selectedEnzyme]?.label}?</h3>
+            <div className="flex justify-around">
+              <button
+                onClick={() => handlePopupSelection("gene")}
+                className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+              >
+                Gene
+              </button>
+              <button
+                onClick={() => handlePopupSelection("plasmid")}
+                className="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600"
+              >
+                Plasmid
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

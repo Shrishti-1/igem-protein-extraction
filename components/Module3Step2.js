@@ -1,7 +1,7 @@
 'use client';
 
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import React, { useState } from 'react';
 
 const Module3Step2 = ({ onDone }) => {
   const [primersDropped, setPrimersDropped] = useState(false);
@@ -9,12 +9,20 @@ const Module3Step2 = ({ onDone }) => {
   const [cycleLevel, setCycleLevel] = useState(null);
   const [result, setResult] = useState('');
   const [copies, setCopies] = useState(0);
+  
+  const pcrMachineRef = useRef(null);
 
-  const handleDrop = (type) => {
-    if (type === 'primers') setPrimersDropped(true);
-    if (type === 'enzyme') setEnzymeDropped(true);
+  // Handle PCR Primers and Enzyme clicks (for mobile-friendly)
+  const handleAddItem = (type) => {
+    if (type === 'primers') {
+      setPrimersDropped(true);
+    }
+    if (type === 'enzyme') {
+      setEnzymeDropped(true);
+    }
   };
 
+  // Handle PCR process start
   const handleStartPCR = () => {
     if (!primersDropped || !enzymeDropped || !cycleLevel) {
       setResult('⚠️ Add everything and choose cycle level!');
@@ -40,8 +48,7 @@ const Module3Step2 = ({ onDone }) => {
     <div className="space-y-6 p-4 text-white bg-gradient-to-br from-[#1e293b] to-[#0f172a] min-h-screen">
       <h2 className="text-3xl font-bold text-yellow-300">🧬 Finding Our Gene (PCR)</h2>
       <p className="text-lg text-gray-300">
-        Drag the tools into the PCR machine and choose a cycle level to amplify the <strong>&quot;Protein X&quot;</strong> gene!
-
+        Click to add the tools into the PCR machine and choose a cycle level to amplify the <strong>&quot;Protein X&quot;</strong> gene!
       </p>
 
       {/* DNA Strand Image */}
@@ -57,22 +64,21 @@ const Module3Step2 = ({ onDone }) => {
         </div>
       </div>
 
-      {/* Drag Tools */}
+      {/* Buttons to add tools */}
       <div className="flex flex-wrap gap-6 justify-center mt-6">
         {!primersDropped && (
           <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData('tool', 'primers')}
-            className="cursor-move bg-blue-500 px-4 py-2 rounded-full text-white shadow hover:scale-105 transition"
+            onClick={() => handleAddItem('primers')}
+            className="cursor-pointer bg-blue-500 px-4 py-2 rounded-full text-white shadow hover:scale-105 transition"
           >
             🔹 PCR Primers
           </div>
         )}
+
         {!enzymeDropped && (
           <div
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData('tool', 'enzyme')}
-            className="cursor-move bg-purple-500 px-4 py-2 rounded-full text-white shadow hover:scale-105 transition"
+            onClick={() => handleAddItem('enzyme')}
+            className="cursor-pointer bg-purple-500 px-4 py-2 rounded-full text-white shadow hover:scale-105 transition"
           >
             🧪 DNA Polymerase
           </div>
@@ -81,13 +87,7 @@ const Module3Step2 = ({ onDone }) => {
 
       {/* PCR Machine Drop Zone */}
       <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => {
-          const tool = e.dataTransfer.getData('tool');
-          if (tool === 'primers' || tool === 'enzyme') {
-            handleDrop(tool);
-          }
-        }}
+        ref={pcrMachineRef}
         className="mt-6 mx-auto w-64 h-32 border-4 border-dashed border-green-400 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-md text-lg"
       >
         🧬 PCR Machine

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, Children, useRef, useLayoutEffect } from "react";
+import React, { useState, Children, useEffect, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Stepper({
@@ -20,7 +20,11 @@ export default function Stepper({
   renderStepIndicator,
   ...rest
 }) {
-  const [currentStep, setCurrentStep] = useState(initialStep);
+  // Retrieve the saved step from localStorage (if any)
+  const storedStep = localStorage.getItem("currentStep");
+  const startingStep = storedStep ? parseInt(storedStep) : initialStep;
+
+  const [currentStep, setCurrentStep] = useState(startingStep);
   const [direction, setDirection] = useState(0);
   const stepsArray = Children.toArray(children);
   const totalSteps = stepsArray.length;
@@ -31,6 +35,8 @@ export default function Stepper({
     setCurrentStep(newStep);
     if (newStep > totalSteps) onFinalStepCompleted();
     else onStepChange(newStep);
+    // Save the current step to localStorage whenever it changes
+    localStorage.setItem("currentStep", newStep);
   };
 
   const handleBack = () => {
@@ -51,6 +57,14 @@ export default function Stepper({
     setDirection(1);
     updateStep(totalSteps + 1);
   };
+
+  useEffect(() => {
+    // Optional: Reset the step on a full reset (e.g. refresh or navigate away)
+    const storedStep = localStorage.getItem("currentStep");
+    if (!storedStep) {
+      localStorage.setItem("currentStep", startingStep);
+    }
+  }, []);
 
   return (
     <div

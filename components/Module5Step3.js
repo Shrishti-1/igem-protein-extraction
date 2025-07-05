@@ -88,12 +88,12 @@ const Module5Step3 = ({ onDone }) => {
         {/* Done Button */}
         {proteinsVisible && (
           <div className="text-center mt-10">
-            <button
+            {/* <button
               onClick={onDone}
               className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-bold shadow"
             >
               ✅ Done
-            </button>
+            </button> */}
           </div>
         )}
       </div>
