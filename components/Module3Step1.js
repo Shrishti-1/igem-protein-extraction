@@ -36,7 +36,7 @@ const KidFriendlyPlasmid = ({ onDone }) => {
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 max-w-xl mx-auto shadow-lg">
           <h2 className="text-2xl font-bold text-yellow-300 mb-2">🔬 Introducing the Plasmid</h2>
           <p className="text-gray-300 text-base">
-            This is our <strong>“gene delivery truck”</strong>! Each part plays a key role in delivering and expressing our gene inside bacteria.
+            This is our <strong>&ldquo;gene delivery truck&rdquo;</strong>! Each part plays a key role in delivering and expressing our gene inside bacteria.
             Tap any glowing part to explore its job.
           </p>
         </div>
