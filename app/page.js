@@ -15,7 +15,7 @@ const Page = () => {
 
   return (
     <div
-      className="text-white md:p-[11rem] min-h-screen w-full bg-[#111]"
+      className="text-white min-h-screen w-full bg-[#111] flex flex-col items-center justify-center"
       style={{
         backgroundImage: "url('/labo.jpg')",
         backgroundSize: "cover",
@@ -23,41 +23,53 @@ const Page = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Stepper
-        initialStep={1}
-        onStepChange={(step) => {
-          console.log('Current step:', step);
-        }}
-        onFinalStepCompleted={() => console.log('All steps completed!')}
-        backButtonText="Previous"
-        nextButtonText="Next"
-      >
-        <Step>
+      <div className="w-full h-full flex flex-col justify-center items-center">
+        <Stepper
+          initialStep={1}
+          onStepChange={(step) => {
+            console.log('Current step:', step);
+          }}
+          onFinalStepCompleted={() => console.log('All steps completed!')}
+          backButtonText="Previous"
+          nextButtonText="Next"
+        >
           <Step>
-            <Module1 />
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module1 />
+            </div>
           </Step>
-        </Step>
 
-        <Step>
-          <Module2 />
-        </Step>
+          <Step>
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module2 />
+            </div>
+          </Step>
 
-        <Step>
-         <Module3/>
-        </Step>
+          <Step>
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module3 />
+            </div>
+          </Step>
 
-        <Step>
-<Module4/>
-        </Step>
-        <Step>
-        
-          <Module5/>
-        </Step>
-        <Step>
-          <Module6/>
-        </Step>
-        
-      </Stepper>
+          <Step>
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module4 />
+            </div>
+          </Step>
+
+          <Step>
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module5 />
+            </div>
+          </Step>
+
+          <Step>
+            <div className="min-h-[500px] flex justify-center items-center w-full">
+              <Module6 />
+            </div>
+          </Step>
+        </Stepper>
+      </div>
     </div>
   );
 };

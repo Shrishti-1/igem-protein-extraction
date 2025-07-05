@@ -116,7 +116,7 @@ export default function Stepper({
         {/* Footer Navigation Buttons */}
         {!isCompleted && (
           <div
-            className={`fixed bottom-0 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
+            className={`sticky bottom-10 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
           >
             <div
               className="max-w-5xl mx-auto flex justify-between items-center bg-white/30 backdrop-blur-sm

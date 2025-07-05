@@ -66,6 +66,10 @@ const Module2 = () => {
 
   return (
     <div className="px-4 py-8 max-w-5xl mx-auto min-h-screen space-y-10 text-white">
+     <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text p-3 rounded-full text-center shadow-lg hover:scale-105 transform transition-all">
+  Gene Extraction from 'Bacteria A'
+</div>
+
       {step === 0 && (
         <>
           {/* Doctor Instruction */}
@@ -104,6 +108,7 @@ const Module2 = () => {
                   draggable={false}
                   priority
                 />
+                <h1>Culture of Bacteria A</h1>
               </div>
             </Draggable>
 

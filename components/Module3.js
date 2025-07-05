@@ -33,7 +33,10 @@ const Module3 = () => {
 
   return (
     <div className="p-6 rounded-xl shadow-md h-fit mb-56 max-w-xl mx-auto space-y-6">
-      <h2 className="text-xl font-semibold text-center">Module Step {currentStep + 1}</h2>
+      {/* <h2 className="text-xl font-semibold text-center">Module Step {currentStep + 1}</h2> */}
+<div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text p-3 rounded-full text-center shadow-lg hover:scale-105 transform transition-all">
+  Cloning the Gene (into a Plasmid)
+</div>
 
       <StepComponent onDone={markDoneAndNext} />
 
