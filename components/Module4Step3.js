@@ -103,7 +103,7 @@ const Module4Step3 = ({ onDone }) => {
         )}
 
         {/* Done */}
-        {dropped && (
+        {/* {dropped && (
           <div className="text-center mt-10">
             <button
               onClick={onDone}
@@ -112,7 +112,7 @@ const Module4Step3 = ({ onDone }) => {
               ✅ Done
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

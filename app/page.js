@@ -56,10 +56,7 @@ const Page = () => {
         <Step>
           <Module6/>
         </Step>
-        <Step>
-          <h2 className="text-2xl font-semibold mb-2">Final Step</h2>
-          <p>You made it till7th!</p>
-        </Step>
+        
       </Stepper>
     </div>
   );

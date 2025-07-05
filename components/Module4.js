@@ -11,7 +11,6 @@ const steps = [
   { id: 1, component: Module4Step1 },
   { id: 2, component: Module4Step2 },
   { id: 3, component: Module4Step3 },
-  // { id: 4, component: Module4Step4 },
 ];
 
 const Module4 = () => {

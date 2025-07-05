@@ -41,7 +41,7 @@ const Module3 = () => {
         <button
           onClick={() => goToStep(currentStep - 1)}
           disabled={currentStep === 0}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
+          className="px-4 py-2 bg-gray-200 text-black rounded disabled:opacity-40"
         >
           Previous
         </button>

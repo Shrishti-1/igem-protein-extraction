@@ -79,12 +79,12 @@ const ClarificationStep = ({ onDone }) => {
           <div className="mt-4 text-cyan-300 text-lg font-semibold animate-fadeInSlow">
             🔬 SDS-PAGE shows clear band at expected size! Purification successful.
           </div>
-          <button
+          {/* <button
             onClick={onDone}
             className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow"
           >
             ✅ Done
-          </button>
+          </button> */}
         </>
       )}
 

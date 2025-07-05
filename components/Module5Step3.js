@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-const Module5Step4 = ({ onDone }) => {
+const Module5Step3 = ({ onDone }) => {
   const [spinning, setSpinning] = useState(false);
   const [pelleted, setPelleted] = useState(false);
   const [proteinsVisible, setProteinsVisible] = useState(false);
@@ -145,4 +145,4 @@ const Module5Step4 = ({ onDone }) => {
   );
 };
 
-export default Module5Step4;
+export default Module5Step3;

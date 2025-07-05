@@ -94,14 +94,14 @@ const Module3Step4 = ({ onDone }) => {
       )}
 
       {/* Done Button */}
-      <div className="text-center mt-10">
+      {/* <div className="text-center mt-10">
         <button
           onClick={onDone}
           className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-full text-white font-bold shadow"
         >
           ✅ Done
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
