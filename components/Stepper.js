@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, Children, useEffect, useRef, useLayoutEffect } from "react";
+import React, { useState, useEffect, Children } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Stepper({
@@ -20,25 +20,34 @@ export default function Stepper({
   renderStepIndicator,
   ...rest
 }) {
-  // Retrieve the saved step from localStorage (if any)
-  const storedStep = localStorage.getItem("currentStep");
-  const startingStep = storedStep ? parseInt(storedStep) : initialStep;
-
-  const [currentStep, setCurrentStep] = useState(startingStep);
+  // Initialize step state with a fallback to initialStep
+  const [currentStep, setCurrentStep] = useState(initialStep);
   const [direction, setDirection] = useState(0);
   const stepsArray = Children.toArray(children);
   const totalSteps = stepsArray.length;
   const isCompleted = currentStep > totalSteps;
   const isLastStep = currentStep === totalSteps;
 
+  // Get current step from localStorage if it's available
+  useEffect(() => {
+    const storedStep = localStorage.getItem("currentStep");
+    if (storedStep) {
+      setCurrentStep(parseInt(storedStep));  // Load saved step from localStorage
+    }
+  }, []);
+
+  // Update step and store it in localStorage
   const updateStep = (newStep) => {
     setCurrentStep(newStep);
-    if (newStep > totalSteps) onFinalStepCompleted();
-    else onStepChange(newStep);
-    // Save the current step to localStorage whenever it changes
-    localStorage.setItem("currentStep", newStep);
+    if (newStep > totalSteps) {
+      onFinalStepCompleted();
+    } else {
+      onStepChange(newStep);
+    }
+    localStorage.setItem("currentStep", newStep);  // Save the current step to localStorage
   };
 
+  // Handle back button click
   const handleBack = () => {
     if (currentStep > 1) {
       setDirection(-1);
@@ -46,6 +55,7 @@ export default function Stepper({
     }
   };
 
+  // Handle next button click
   const handleNext = () => {
     if (!isLastStep) {
       setDirection(1);
@@ -53,36 +63,23 @@ export default function Stepper({
     }
   };
 
+  // Handle completion of the last step
   const handleComplete = () => {
     setDirection(1);
     updateStep(totalSteps + 1);
   };
 
-  useEffect(() => {
-    // Optional: Reset the step on a full reset (e.g. refresh or navigate away)
-    const storedStep = localStorage.getItem("currentStep");
-    if (!storedStep) {
-      localStorage.setItem("currentStep", startingStep);
-    }
-  }, []);
-
   return (
     <div
-      className="flex flex-col items-center justify-start min-h-screen w-full px-4 sm:px-6 lg:px-20 py-8
-                 bg-white/30 backdrop-blur-sm
-                 dark:bg-neutral-900/30 dark:backdrop-blur-sm"
+      className="flex flex-col items-center justify-start min-h-screen w-full px-4 sm:px-6 lg:px-20 py-8 bg-white/30 backdrop-blur-sm dark:bg-neutral-900/30 dark:backdrop-blur-sm"
       {...rest}
     >
       <div
-        className={`w-full max-w-5xl rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800
-                   bg-white/30 backdrop-blur-sm
-                   dark:bg-neutral-900/30 dark:backdrop-blur-sm
-                   ${stepCircleContainerClassName}`}
+        className={`w-full max-w-5xl rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800 bg-white/30 backdrop-blur-sm dark:bg-neutral-900/30 dark:backdrop-blur-sm ${stepCircleContainerClassName}`}
       >
         {/* Step Indicators */}
         <div
-          className={`flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-4 sm:px-6 pt-6
-                     ${stepContainerClassName}`}
+          className={`flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-4 sm:px-6 pt-6 ${stepContainerClassName}`}
         >
           {stepsArray.map((_, index) => {
             const stepNumber = index + 1;
@@ -109,9 +106,7 @@ export default function Stepper({
                     }}
                   />
                 )}
-                {isNotLastStep && (
-                  <StepConnector isComplete={currentStep > stepNumber} />
-                )}
+                {isNotLastStep && <StepConnector isComplete={currentStep > stepNumber} />}
               </React.Fragment>
             );
           })}
@@ -129,14 +124,8 @@ export default function Stepper({
 
         {/* Footer Navigation Buttons */}
         {!isCompleted && (
-          <div
-            className={`sticky bottom-10 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}
-          >
-            <div
-              className="max-w-5xl mx-auto flex justify-between items-center bg-white/30 backdrop-blur-sm
-                         dark:bg-neutral-800/30 dark:backdrop-blur-sm
-                         rounded-xl shadow-lg px-4 py-2"
-            >
+          <div className={`sticky bottom-10 left-0 right-0 px-4 sm:px-6 ${footerClassName}`}>
+            <div className="max-w-5xl mx-auto flex justify-between items-center bg-white/30 backdrop-blur-sm dark:bg-neutral-800/30 dark:backdrop-blur-sm rounded-xl shadow-lg px-4 py-2">
               {currentStep !== 1 && (
                 <button
                   onClick={handleBack}
