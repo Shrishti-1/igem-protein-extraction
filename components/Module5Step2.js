@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 
 const Module5Step2 = ({ onDone }) => {
@@ -6,38 +7,44 @@ const Module5Step2 = ({ onDone }) => {
   const [transcriptionStarted, setTranscriptionStarted] = useState(false);
   const [translationStarted, setTranslationStarted] = useState(false);
   const [proteinBuilt, setProteinBuilt] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const handleDrop = () => {
-    setIptgAdded(true);
-    setTimeout(() => setTranscriptionStarted(true), 1000);
-    setTimeout(() => setTranslationStarted(true), 2500);
-    setTimeout(() => setProteinBuilt(true), 4000);
+  const handleClick = () => {
+    setShowPopup(true); // Show popup to ask where to place the IPTG inducer
+  };
+
+  const handlePopupSelection = (target) => {
+    if (target === 'repressor') {
+      setIptgAdded(true);
+      setTimeout(() => setTranscriptionStarted(true), 1000);
+      setTimeout(() => setTranslationStarted(true), 2500);
+      setTimeout(() => setProteinBuilt(true), 4000);
+    }
+    setShowPopup(false); // Close the popup after selection
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white p-6 text-center space-y-6">
       <h2 className="text-3xl font-bold text-yellow-300">🧪 Induction: Making Protein X</h2>
       <p className="text-gray-300 max-w-xl mx-auto">
-        Drag the IPTG inducer to the repressor to begin protein synthesis in BL21 cells.
+        Click the IPTG inducer and select where to place it to begin protein synthesis in BL21 cells.
       </p>
 
-      {/* IPTG Drop Area */}
+      {/* IPTG Button */}
       {!iptgAdded && (
         <div
-          draggable
-          onDragStart={(e) => e.dataTransfer.setData('text', 'iptg')}
-          className="mx-auto mt-4 bg-blue-500 px-6 py-2 rounded-full font-bold w-fit cursor-move"
+          onClick={handleClick}
+          className="mx-auto mt-4 bg-blue-500 px-6 py-2 rounded-full font-bold w-fit cursor-pointer"
         >
           💧 IPTG Inducer
         </div>
       )}
 
+      {/* IPTG Drop Area (Replacer) */}
       <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={handleDrop}
         className="w-72 h-40 mx-auto mt-6 border-4 border-dashed border-green-400 rounded-xl flex items-center justify-center bg-white/10"
       >
-        {iptgAdded ? '🧬 IPTG Bound!' : '🎯 Drop IPTG Here (Repressor)'}
+        {iptgAdded ? '🧬 IPTG Bound!' : '🎯 Click to place IPTG on Repressor'}
       </div>
 
       {/* Transcription Phase */}
@@ -87,6 +94,23 @@ const Module5Step2 = ({ onDone }) => {
         >
           ✅ Done
         </button>
+      )}
+
+      {/* Popup to ask where to place IPTG */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-bold mb-4">Where do you want to place the IPTG inducer?</h3>
+            <div className="flex justify-around">
+              <button
+                onClick={() => handlePopupSelection('repressor')}
+                className="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600"
+              >
+                Repressor
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
