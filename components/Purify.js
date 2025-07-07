@@ -90,7 +90,7 @@ const Purify = () => {
 
             {!isDropped && proteaseAdded && (
               <motion.div
-                className="absolute top-6 left-4 w-12 h-12 bg-yellow-400 rounded-full"
+                className="absolute top-8.5 left-7 w-6 h-6 bg-yellow-400 rounded-full"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: isDropped ? 0 : 1 }}
                 transition={{ duration: 1 }}
@@ -100,7 +100,7 @@ const Purify = () => {
 
             {!isDropped && rnaseAdded && (
               <motion.div
-                className="absolute top-16 left-8 w-8 h-16 bg-pink-400 rounded-lg"
+                className="absolute top-14 left-7.5 w-5 h-11 bg-pink-400 rounded-lg"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: isDropped ? 0 : 1 }}
                 transition={{ duration: 1 }}
@@ -108,7 +108,7 @@ const Purify = () => {
               />
             )}
 
-            <div className="absolute top-20 left-2 w-12 h-24 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg" />
+            {/*<div className="absolute top-20 left-2 w-12 h-24 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg" />*/}
           </div>
         </Draggable>
 
