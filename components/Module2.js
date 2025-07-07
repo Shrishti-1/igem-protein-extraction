@@ -21,23 +21,13 @@ const Module2 = () => {
 
   // Load saved step + settings + result
   useEffect(() => {
-    const saved = localStorage.getItem(LOCAL_KEY);
-    if (saved) {
-      const data = JSON.parse(saved);
-  
-      if (data.step && data.step > 0) {
-        setStep(data.step);
-        if (data.settings) setSettings(data.settings);
-        if (data.result) setResult(data.result);
-      } else {
-        // If step is 0 or not defined, start fresh
-        localStorage.removeItem(LOCAL_KEY);
-        setStep(0);
-        setSettings({ temp: "", time: "" });
-        setResult("");
-      }
-    }
+    // Always reset on page load
+    localStorage.removeItem(LOCAL_KEY);
+    setStep(0);
+    setSettings({ temp: "", time: "" });
+    setResult("");
   }, []);
+  
   
 
   // Save to localStorage on state changes
