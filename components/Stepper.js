@@ -104,14 +104,25 @@ export default function Stepper({
         </div>
 
         {/* Step Content */}
-        <StepContentWrapper
-          isCompleted={isCompleted}
-          currentStep={currentStep}
-          direction={direction}
-          className={`space-y-4 px-4 sm:px-6 pb-24 sm:pb-32 pt-6 ${contentClassName}`}
-        >
-          {stepsArray[currentStep - 1]}
-        </StepContentWrapper>
+        {isCompleted ? (
+  <div className="text-center py-32 space-y-6 animate-fadeInSlow">
+    <h1 className="text-4xl font-bold text-blue-700">🎉 Congratulations!</h1>
+    <p className="text-lg text-gray-800">
+  You have now completed <span className="text-blue-700 font-semibold">protein extraction</span> successfully.
+</p>
+
+  </div>
+) : (
+  <StepContentWrapper
+    isCompleted={false}
+    currentStep={currentStep}
+    direction={direction}
+    className={`space-y-4 px-4 sm:px-6 pb-24 sm:pb-32 pt-6 ${contentClassName}`}
+  >
+    {stepsArray[currentStep - 1]}
+  </StepContentWrapper>
+)}
+
 
         {/* Footer Navigation Buttons */}
         {!isCompleted && (

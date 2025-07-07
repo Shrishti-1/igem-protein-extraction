@@ -114,21 +114,26 @@ const Purify = () => {
 
         {/* Purification Column Drop Zone */}
         <div
-          ref={dropZoneRef}
-          className="w-40 h-56 border-4 border-dashed border-cyan-400 rounded-xl flex flex-col items-center justify-center"
-        >
-          <div className="text-cyan-400 font-semibold mb-2">
-            DNA Purification Column
-          </div>
-          <Image
-            src="/column.svg"
-            alt="Purification Column"
-            width={80}
-            height={120}
-            className="opacity-60"
-            draggable={false}
-          />
-        </div>
+  ref={dropZoneRef}
+  className="w-40 h-56 border-4 border-dashed border-cyan-400 rounded-xl flex flex-col items-center justify-center"
+>
+  {!isDropped && (
+    <>
+      <div className="text-cyan-400 font-semibold text-center mb-2">
+        DNA Purification Column
+      </div>
+      <Image
+        src="/column.png"
+        alt="Purification Column"
+        width={120}
+        height={180}
+        className="opacity-60"
+        draggable={false}
+      />
+    </>
+  )}
+</div>
+
       </div>
 
       {!isDropped && (

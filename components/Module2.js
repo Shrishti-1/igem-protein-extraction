@@ -24,11 +24,21 @@ const Module2 = () => {
     const saved = localStorage.getItem(LOCAL_KEY);
     if (saved) {
       const data = JSON.parse(saved);
-      if (data.step !== undefined) setStep(data.step);
-      if (data.settings) setSettings(data.settings);
-      if (data.result) setResult(data.result);
+  
+      if (data.step && data.step > 0) {
+        setStep(data.step);
+        if (data.settings) setSettings(data.settings);
+        if (data.result) setResult(data.result);
+      } else {
+        // If step is 0 or not defined, start fresh
+        localStorage.removeItem(LOCAL_KEY);
+        setStep(0);
+        setSettings({ temp: "", time: "" });
+        setResult("");
+      }
     }
   }, []);
+  
 
   // Save to localStorage on state changes
   useEffect(() => {

@@ -24,11 +24,14 @@ const Module5Step2 = ({ onDone }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white p-6 text-center space-y-6">
-      <h2 className="text-3xl font-bold text-yellow-300">🧪 Induction: Making Protein X</h2>
-      <p className="text-gray-300 max-w-xl mx-auto">
-        Click the IPTG inducer and select where to place it to begin protein synthesis in BL21 cells.
-      </p>
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1f2937] flex items-center justify-center p-6">
+      <div className="bg-[#0f172a] rounded-xl shadow-xl backdrop-blur-md border border-white/10 px-6 py-10 max-w-xl w-full space-y-6 text-center text-white">
+        
+        {/* Title */}
+        <h2 className="text-3xl font-bold text-yellow-300">🧪 Induction: Making Protein X</h2>
+        <p className="text-gray-300 max-w-xl mx-auto">
+          Click the IPTG inducer and select where to place it to begin protein synthesis in BL21 cells.
+        </p>
 
       {/* IPTG Button */}
       {!iptgAdded && (
@@ -98,7 +101,7 @@ const Module5Step2 = ({ onDone }) => {
 
       {/* Popup to ask where to place IPTG */}
       {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-[#0f172a] rounded-xl shadow-xl backdrop-blur-md border border-white/10 px-6 py-10 max-w-xl w-full space-y-6 text-center text-white ">
           <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm w-full">
             <h3 className="text-lg font-bold mb-4">Where do you want to place the IPTG inducer?</h3>
             <div className="flex justify-around">
@@ -112,6 +115,7 @@ const Module5Step2 = ({ onDone }) => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };
